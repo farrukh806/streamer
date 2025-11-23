@@ -13,7 +13,15 @@ export interface IUser {
     friends: Array<mongoose.Schema.Types.ObjectId>
 }
 
-const userSchema = new mongoose.Schema<IUser>({
+// Define interface for instance methods
+interface IUserMethods {
+    comparePassword(password: string): Promise<boolean>;
+}
+
+// Create a Model type that knows about both the document properties and methods
+type UserModel = mongoose.Model<IUser, {}, IUserMethods>;
+
+const userSchema = new mongoose.Schema<IUser, UserModel, IUserMethods>({
     fullName: {
         type: String,
         required: true
@@ -26,7 +34,8 @@ const userSchema = new mongoose.Schema<IUser>({
     password: {
         type: String,
         required: true,
-        minLength: 4
+        minLength: 4,
+        select: false,
     },
     bio: {
         type: String,
