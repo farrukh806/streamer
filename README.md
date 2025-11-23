@@ -1,0 +1,240 @@
+# 🎥 Streamer
+
+> **⚠️ Project Status: In Progress**
+> 
+> This project is currently under active development. More comprehensive documentation, features, and setup instructions will be added as the project progresses.
+
+## 📖 Overview
+
+Streamer is a modern language learning platform that combines video streaming with social features to create an immersive learning experience. Users can connect with friends, practice languages through video content, and track their learning progress.
+
+## 🚀 Tech Stack
+
+### Backend
+- **Runtime**: Node.js with TypeScript
+- **Framework**: Express.js v5
+- **Database**: MongoDB with Mongoose ODM
+- **Authentication**: JWT (JSON Web Tokens) with secure HTTP-only cookies
+- **Password Hashing**: bcryptjs
+- **Validation**: Zod for runtime type validation
+- **Video/Chat**: Stream Chat SDK integration
+- **Development**: Nodemon with ts-node for hot reloading
+
+### Frontend
+- *(Coming soon - details will be added as development progresses)*
+
+## 📁 Project Structure
+
+```
+streamer/
+├── backend/
+│   ├── src/
+│   │   ├── controllers/     # Request handlers
+│   │   │   └── auth.controller.ts
+│   │   ├── models/          # Database models
+│   │   │   └── User.ts
+│   │   ├── routes/          # API routes
+│   │   │   └── auth.route.ts
+│   │   ├── middlewares/     # Custom middleware
+│   │   │   └── error.ts
+│   │   ├── validations/     # Zod schemas
+│   │   │   ├── env.ts
+│   │   │   └── user.ts
+│   │   ├── lib/             # Utilities and constants
+│   │   │   ├── db.ts
+│   │   │   └── constants.ts
+│   │   └── server.ts        # Application entry point
+│   ├── .env.example         # Environment variables template
+│   ├── package.json
+│   └── tsconfig.json
+└── frontend/
+    └── (Coming soon)
+```
+
+## ✨ Features
+
+### Current Features
+- ✅ User authentication (signup, login, logout)
+- ✅ Secure password hashing
+- ✅ JWT-based session management
+- ✅ Input validation with Zod
+- ✅ MongoDB integration
+- ✅ Error handling middleware
+- ✅ TypeScript for type safety
+- ✅ Environment variable validation
+
+### Planned Features
+- 🔄 Video streaming integration
+- 🔄 Real-time chat functionality
+- 🔄 Friend system
+- 🔄 Language learning progress tracking
+- 🔄 User profiles with language preferences
+- 🔄 Onboarding flow
+
+## 🛠️ Setup Instructions
+
+### Prerequisites
+- Node.js (v20 or higher)
+- MongoDB database (local or MongoDB Atlas)
+- Stream Chat account (for video/chat features)
+
+### Backend Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/farrukh806/streamer.git
+   cd streamer/backend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+   
+   Create a `.env` file in the `backend` directory by copying `.env.example`:
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Update the `.env` file with your credentials:
+   ```env
+   PORT=5001
+   MONGODB_URI=mongodb+srv://<username>:<password>@<domain>/<database_name>
+   JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+   STREAM_APP_KEY=YOUR_STREAM_APP_KEY
+   STREAM_APP_SECRET=YOUR_STREAM_APP_SECRET
+   NODE_ENV=development
+   ```
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+   
+   The server will start on `http://localhost:5001` (or the PORT you specified)
+
+5. **Build for production**
+   ```bash
+   npm run build
+   npm start
+   ```
+
+## 📡 API Endpoints
+
+### Authentication Routes
+
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| POST | `/api/auth/signup` | Register a new user | No |
+| POST | `/api/auth/login` | Login existing user | No |
+| GET | `/api/auth/logout` | Logout current user | Yes |
+
+### Request/Response Examples
+
+#### Signup
+**Request:**
+```json
+POST /api/auth/signup
+{
+  "fullName": "John Doe",
+  "email": "john@example.com",
+  "password": "password123",
+  "nativeLanguage": "English",
+  "learningLanguage": "Spanish",
+  "profilePicture": "https://avatar.iran.liara.run/public/48"
+}
+```
+
+**Response:**
+```json
+{
+  "message": "User created successfully",
+  "success": true,
+  "data": {
+    "_id": "...",
+    "fullName": "John Doe",
+    "email": "john@example.com",
+    // ... other user fields
+  }
+}
+```
+
+#### Login
+**Request:**
+```json
+POST /api/auth/login
+{
+  "email": "john@example.com",
+  "password": "password123"
+}
+```
+
+**Response:**
+```json
+{
+  "message": "User logged in successfully",
+  "success": true,
+  "data": {
+    "_id": "...",
+    "fullName": "John Doe",
+    "email": "john@example.com",
+    // ... other user fields (password excluded)
+  }
+}
+```
+
+## 🔒 Security Features
+
+- Passwords are hashed using bcryptjs with salt rounds
+- JWT tokens stored in HTTP-only cookies to prevent XSS attacks
+- Cookies configured with `sameSite: 'strict'` to prevent CSRF
+- Secure cookies in production environment
+- Password field excluded from queries by default
+- Environment variable validation on startup
+
+## 🗄️ Database Schema
+
+### User Model
+```typescript
+{
+  fullName: string;
+  email: string;           // unique
+  password: string;        // hashed, not returned in queries
+  bio: string;             // optional
+  profilePicture: string;  // optional
+  nativeLanguage: string;
+  learningLanguage: string;
+  isOnboarded: boolean;    // default: false
+  friends: ObjectId[];     // references to other users
+  timestamps: true;        // createdAt, updatedAt
+}
+```
+
+## 🧪 Development
+
+### Available Scripts
+
+- `npm run dev` - Start development server with hot reload
+- `npm run build` - Compile TypeScript to JavaScript
+- `npm start` - Run production build
+
+### TypeScript Configuration
+
+The project uses strict TypeScript settings for maximum type safety:
+- Target: ES2020
+- Module: CommonJS
+- Strict mode enabled
+- ESModule interop enabled
+
+## 🤝 Contributing
+
+*(Guidelines will be added as the project matures)*
+
+## 📝 License
+
+ISC
+---
+
+**Note**: This README will be updated regularly as new features are implemented and the project evolves. Check back for updates!
