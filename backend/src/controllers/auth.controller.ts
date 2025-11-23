@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import User, { IUser } from "../models/User";
 import { env } from "../validations/env";
 import { CONSTANTS } from "../lib/constants";
+import { upsertStreamUsers } from "../lib/stream";
 
 export async function signup(req: Request, res: Response) {
     try {
@@ -15,6 +16,13 @@ export async function signup(req: Request, res: Response) {
         }
         // else create the user in db and as well as in STREAM
         const user = await User.create(userData);
+        await upsertStreamUsers([
+            {
+                id: user._id.toString(),
+                name: user.fullName,
+                image: user.profilePicture,
+            }
+        ]);
         // create a jwt token
         const token = jwt.sign({ id: user._id }, env.JWT_SECRET, { expiresIn: CONSTANTS.JWT_EXPIRATION });
         // set cookie
