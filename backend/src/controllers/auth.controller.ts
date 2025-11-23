@@ -94,13 +94,7 @@ async function onboarding(req: Request, res: Response) {
 }
 
 async function getCurrentUser(req: Request, res: Response) {
-    try {
-        const user = req.user as IUser;
-        return res.status(200).json({ message: "User fetched successfully", data: user, success: true });
-    } catch (error) {
-        // throw error as error middleware will handle it 
-        throw error;
-    }
+    return res.status(200).json({ message: "User fetched successfully", data: req.user, success: true });
 }
 
 const AuthController = {
