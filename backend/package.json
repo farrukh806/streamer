@@ -17,7 +17,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^9.0.0",
     "parser": "^0.1.4",
-    "stream-chat": "^9.26.0"
+    "stream-chat": "^9.26.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/express": "^5.0.5",
