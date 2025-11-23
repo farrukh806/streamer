@@ -4,26 +4,30 @@
   "description": "",
   "license": "ISC",
   "author": "",
-  "type": "module",
-  "main": "server.ts",
+  "main": "src/server.ts",
   "scripts": {
-    "dev": "nodemon server.ts"
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "nodemon --watch src/**/*.ts --exec ts-node src/server.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cookie": "^1.0.2",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^9.0.0",
     "parser": "^0.1.4",
-    "stream-chat": "^9.26.0",
-    "ts-node": "^10.9.2"
+    "stream-chat": "^9.26.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.5",
     "@types/node": "^24.10.1",
-    "nodemon": "^3.1.11"
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "install": "^0.13.0",
+    "nodemon": "^3.1.11",
+    "npm": "^11.6.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }
