@@ -20,7 +20,7 @@ function validateEnv(): EnvConfig {
     } catch (error) {
         if (error instanceof z.ZodError) {
             console.error("❌ Environment validation failed:")
-            error.issues.forEach((err: z.ZodIssue) => {
+            error.issues.forEach((err: z.core.$ZodIssue) => {
                 console.error(`  - ${err.path.join(".")}: ${err.message}`)
             })
         } else {
