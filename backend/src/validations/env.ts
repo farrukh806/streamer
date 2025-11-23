@@ -14,6 +14,7 @@ export type EnvConfig = z.infer<typeof envValidationSchema>
 
 // Validate once and export the result
 function validateEnv(): EnvConfig {
+    console.log("Validating environment variables...")
     try {
         const parsed = envValidationSchema.parse(process.env)
         return parsed

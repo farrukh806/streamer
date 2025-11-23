@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { userCredsValidationSchema, userValidationSchema } from "../validations/user";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
-import User from "../models/User";
+import User, { IUser } from "../models/User";
 import { env } from "../validations/env";
 import { CONSTANTS } from "../lib/constants";
 
@@ -31,6 +30,7 @@ export async function signup(req: Request, res: Response) {
 export async function login(req: Request, res: Response) {
     try {
         const userCreds = userCredsValidationSchema.parse(req.body);
+        // explicitly select password field, as we have disabled password query by default inside User model
         const user = await User.findOne({ email: userCreds.email }).select("+password");
         if (!user) {
             return res.status(401).json({ message: "Invalid email or password", success: false });
@@ -43,7 +43,10 @@ export async function login(req: Request, res: Response) {
         const token = jwt.sign({ id: user._id }, env.JWT_SECRET, { expiresIn: CONSTANTS.JWT_EXPIRATION });
         // set cookie
         res.cookie("jwt", token, { ...CONSTANTS.COOKIE_OPTIONS });
-        return res.status(200).json({ message: "User logged in successfully", data: user, success: true });
+        const _user: Partial<IUser> = user.toObject();
+        // remove password before sending response to client
+        delete _user["password"]
+        return res.status(200).json({ message: "User logged in successfully", data: _user, success: true });
     } catch (error) {
         // throw error as error middleware will handle it 
         throw error;
