@@ -11,6 +11,7 @@ export interface IUser {
     learningLanguage: string;
     isOnboarded: boolean;
     friends: Array<mongoose.Schema.Types.ObjectId>
+    _id: mongoose.Schema.Types.ObjectId;
 }
 
 // Define interface for instance methods
@@ -47,11 +48,11 @@ const userSchema = new mongoose.Schema<IUser, UserModel, IUserMethods>({
     },
     nativeLanguage: {
         type: String,
-        required: true,
+        default: ""
     },
     learningLanguage: {
         type: String,
-        required: true
+        default: ""
     },
     isOnboarded: {
         type: Boolean,

@@ -6,13 +6,15 @@ dotenv.config({ quiet: true });
 import express from 'express';
 import authRouter from "./routes/auth.route"
 import { connectToDB } from './lib/db';
-import { errorHandlerMiddleware } from './middlewares/error';
+import { errorHandlerMiddleware } from './middlewares/error.middleware';
 import { env } from './validations/env';
+import cookieParser from "cookie-parser";
 
 const app = express();
 const PORT = env.PORT;
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
 
