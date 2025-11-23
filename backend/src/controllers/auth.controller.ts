@@ -12,7 +12,7 @@ export async function signup(req: Request, res: Response) {
         // check if user already exists
         const existingUser = await User.findOne({ email: userData.email });
         if (existingUser) {
-            return res.status(409).json({ message: "User already exists", success: false });
+            return res.status(409).json({ message: `User already exists with ${userData.email}`, success: false });
         }
         // else create the user in db and as well as in STREAM
         const user = await User.create(userData);
