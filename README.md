@@ -30,16 +30,20 @@ streamer/
 ├── backend/
 │   ├── src/
 │   │   ├── controllers/     # Request handlers
-│   │   │   └── auth.controller.ts
+│   │   │   ├── auth.controller.ts
+│   │   │   └── user.controller.ts
 │   │   ├── models/          # Database models
-│   │   │   └── User.ts
+│   │   │   ├── User.ts
+│   │   │   └── FriendRequest.ts
 │   │   ├── routes/          # API routes
-│   │   │   └── auth.route.ts
+│   │   │   ├── auth.route.ts
+│   │   │   └── user.route.ts
 │   │   ├── middlewares/     # Custom middleware
 │   │   │   └── error.ts
 │   │   ├── validations/     # Zod schemas
 │   │   │   ├── env.ts
-│   │   │   └── user.ts
+│   │   │   ├── user.ts
+│   │   │   └── friendRequest.ts
 │   │   ├── lib/             # Utilities and constants
 │   │   │   ├── db.ts
 │   │   │   └── constants.ts
@@ -62,14 +66,20 @@ streamer/
 - ✅ Error handling middleware
 - ✅ TypeScript for type safety
 - ✅ Environment variable validation
+- ✅ **Friend System**
+  - User recommendations (find users to connect with)
+  - Send friend requests
+  - Accept/reject friend requests
+  - View received friend requests
+  - View sent friend requests
+  - View friends list with populated user details
 
 ### Planned Features
 - 🔄 Video streaming integration
 - 🔄 Real-time chat functionality
-- 🔄 Friend system
 - 🔄 Language learning progress tracking
-- 🔄 User profiles with language preferences
-- 🔄 Onboarding flow
+- 🔄 Enhanced user profiles
+- 🔄 Onboarding flow improvements
 
 ## 🛠️ Setup Instructions
 
@@ -131,6 +141,17 @@ streamer/
 | POST | `/api/auth/login` | Login existing user | No |
 | GET | `/api/auth/logout` | Logout current user | Yes |
 
+### User Routes
+
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| GET | `/api/user/recommendations` | Get recommended users to connect with | Yes |
+| GET | `/api/user/friends` | Get current user's friends list | Yes |
+| POST | `/api/user/send-friend-request/:id` | Send a friend request to a user | Yes |
+| PUT | `/api/user/update-friend-request-status/:id` | Accept or reject a friend request | Yes |
+| GET | `/api/user/friend-requests` | Get received friend requests | Yes |
+| GET | `/api/user/sent-friend-requests` | Get sent friend requests | Yes |
+
 ### Request/Response Examples
 
 #### Signup
@@ -138,12 +159,8 @@ streamer/
 ```json
 POST /api/auth/signup
 {
-  "fullName": "John Doe",
   "email": "john@example.com",
   "password": "password123",
-  "nativeLanguage": "English",
-  "learningLanguage": "Spanish",
-  "profilePicture": "https://avatar.iran.liara.run/public/48"
 }
 ```
 
@@ -154,7 +171,6 @@ POST /api/auth/signup
   "success": true,
   "data": {
     "_id": "...",
-    "fullName": "John Doe",
     "email": "john@example.com",
     // ... other user fields
   }
@@ -185,6 +201,153 @@ POST /api/auth/login
 }
 ```
 
+#### Get Recommended Users
+**Request:**
+```
+GET /api/user/recommendations
+```
+
+**Response:**
+```json
+{
+  "message": "Recommendations fetched successfully",
+  "success": true,
+  "data": [
+    {
+      "_id": "...",
+      "fullName": "Jane Smith",
+      "profilePicture": "https://...",
+      "learningLanguage": "French",
+      "nativeLanguage": "English"
+    }
+    // ... more users
+  ]
+}
+```
+
+#### Send Friend Request
+**Request:**
+```
+POST /api/user/send-friend-request/USER_ID
+```
+
+**Response:**
+```json
+{
+  "message": "Friend request sent successfully",
+  "success": true,
+  "data": {
+    "_id": "...",
+    "sender": "...",
+    "recipient": "...",
+    "status": "pending",
+    "createdAt": "...",
+    "updatedAt": "..."
+  }
+}
+```
+
+#### Update Friend Request Status
+**Request:**
+```json
+PUT /api/user/update-friend-request-status/FRIEND_REQUEST_ID
+{
+  "status": "accepted"  // or "rejected"
+}
+```
+
+**Response:**
+```json
+{
+  "message": "Friend request accepted successfully",
+  "success": true
+}
+```
+
+#### Get Friend Requests (Received)
+**Request:**
+```
+GET /api/user/friend-requests
+```
+
+**Response:**
+```json
+{
+  "message": "Friend requests fetched successfully",
+  "success": true,
+  "data": [
+    {
+      "_id": "...",
+      "sender": {
+        "_id": "...",
+        "fullName": "Jane Smith",
+        "profilePicture": "https://...",
+        "learningLanguage": "French",
+        "nativeLanguage": "English"
+      },
+      "recipient": "...",
+      "status": "pending",
+      "createdAt": "...",
+      "updatedAt": "..."
+    }
+  ]
+}
+```
+
+#### Get Sent Friend Requests
+**Request:**
+```
+GET /api/user/sent-friend-requests
+```
+
+**Response:**
+```json
+{
+  "message": "Friend requests fetched successfully",
+  "success": true,
+  "data": [
+    {
+      "_id": "...",
+      "sender": "...",
+      "recipient": {
+        "_id": "...",
+        "fullName": "Bob Johnson",
+        "profilePicture": "https://...",
+        "learningLanguage": "Spanish",
+        "nativeLanguage": "German"
+      },
+      "status": "pending",
+      "createdAt": "...",
+      "updatedAt": "..."
+    }
+  ]
+}
+```
+
+#### Get Friends List
+**Request:**
+```
+GET /api/user/friends
+```
+
+**Response:**
+```json
+{
+  "message": "Friends fetched successfully",
+  "success": true,
+  "data": [
+    {
+      "_id": "...",
+      "fullName": "Alice Brown",
+      "profilePicture": "https://...",
+      "learningLanguage": "Japanese",
+      "nativeLanguage": "English"
+    }
+    // ... more friends
+  ]
+}
+```
+
 ## 🔒 Security Features
 
 - Passwords are hashed using bcryptjs with salt rounds
@@ -193,6 +356,30 @@ POST /api/auth/login
 - Secure cookies in production environment
 - Password field excluded from queries by default
 - Environment variable validation on startup
+- Authorization checks for friend request operations (only recipients can accept/reject)
+
+## 🤝 Friend System Logic
+
+### Sending Friend Requests
+- Users cannot send friend requests to themselves
+- Users cannot send requests to existing friends
+- Duplicate friend requests are prevented (checks both directions)
+- Friend requests are created with "pending" status
+
+### Managing Friend Requests
+- Only the recipient can accept or reject a friend request
+- When accepted:
+  - Both users are added to each other's friends list using `$addToSet` (prevents duplicates)
+  - Request status is updated to "accepted"
+- When rejected:
+  - Request status is updated to "rejected"
+  - No changes are made to friends lists
+
+### User Recommendations
+- Shows users who are:
+  - Not the current user
+  - Not already friends
+  - Have completed onboarding (`isOnboarded: true`)
 
 ## 🗄️ Database Schema
 
@@ -208,6 +395,17 @@ POST /api/auth/login
   learningLanguage: string;
   isOnboarded: boolean;    // default: false
   friends: ObjectId[];     // references to other users
+  timestamps: true;        // createdAt, updatedAt
+}
+```
+
+### FriendRequest Model
+```typescript
+{
+  sender: ObjectId;        // reference to User who sent the request
+  recipient: ObjectId;     // reference to User who receives the request
+  status: string;          // enum: "pending" | "accepted" | "rejected"
+                           // default: "pending"
   timestamps: true;        // createdAt, updatedAt
 }
 ```
