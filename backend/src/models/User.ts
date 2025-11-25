@@ -10,8 +10,8 @@ export interface IUser {
     nativeLanguage: string;
     learningLanguage: string;
     isOnboarded: boolean;
-    friends: Array<mongoose.Schema.Types.ObjectId>
-    _id: mongoose.Schema.Types.ObjectId;
+    friends: Array<mongoose.Types.ObjectId>
+    _id: mongoose.Types.ObjectId;
 }
 
 // Define interface for instance methods
