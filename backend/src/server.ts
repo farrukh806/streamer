@@ -6,6 +6,7 @@ dotenv.config({ quiet: true });
 import express from 'express';
 import authRouter from "./routes/auth.route"
 import userRouter from "./routes/user.route"
+import chatRouter from "./routes/chat.routes";
 import { connectToDB } from './lib/db';
 import { errorHandlerMiddleware } from './middlewares/error.middleware';
 import { env } from './validations/env';
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
+app.use('/api/chat', chatRouter);
 
 app.use(errorHandlerMiddleware);
 
