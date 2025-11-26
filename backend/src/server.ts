@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config({ quiet: true });
 
 import express from 'express';
+import cors from 'cors';
 import authRouter from "./routes/auth.route"
 import userRouter from "./routes/user.route"
 import chatRouter from "./routes/chat.routes";
@@ -17,6 +18,10 @@ const PORT = env.PORT;
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true, // allow cookies
+}));
 
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
