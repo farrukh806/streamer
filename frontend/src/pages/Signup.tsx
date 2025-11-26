@@ -27,7 +27,7 @@ const Signup = () => {
             profilePicture: AVATAR_OPTIONS[0]
         }
     });
-    const { mutateAsync, isPending } = useMutation({
+    const { mutate, isPending } = useMutation({
         mutationFn: UserService.signup,
         onSuccess: (data) => {
             if (data.success) {
@@ -39,11 +39,11 @@ const Signup = () => {
         },
         onError: (error) => {
             handleError(error);
-        }
+        },
     })
 
-    const onSubmit = async (data: SignupFormData) => {
-        await mutateAsync(data)
+    const onSubmit = (data: SignupFormData) => {
+        mutate(data)
     };
 
     return (
