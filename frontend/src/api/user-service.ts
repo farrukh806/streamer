@@ -1,10 +1,12 @@
-import type { SignupFormData } from "../validations/auth";
+import type { SignupFormData, OnboardingFormData, LoginFormData } from "../validations/auth";
 import { FetchHelper } from "./fetch-helper";
 import type { IUser } from "../types/user";
 
 export class UserService {
     private static userProfileEndpoint = "/auth/me"
     private static signupEndpoint = "/auth/signup"
+    private static loginEndpoint = "/auth/login"
+    private static onboardingEndpoint = "/auth/onboarding"
 
     static getUserProfile() {
         return FetchHelper.get<IUser>(UserService.userProfileEndpoint);
@@ -12,5 +14,13 @@ export class UserService {
 
     static signup(data: SignupFormData) {
         return FetchHelper.post<IUser>(UserService.signupEndpoint, data);
+    }
+
+    static onboarding(data: OnboardingFormData) {
+        return FetchHelper.post<IUser>(UserService.onboardingEndpoint, data);
+    }
+
+    static login(data: LoginFormData) {
+        return FetchHelper.post<IUser>(UserService.loginEndpoint, data);
     }
 }
