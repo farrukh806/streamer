@@ -21,7 +21,15 @@ Streamer is a modern language learning platform that combines video streaming wi
 - **Development**: Nodemon with ts-node for hot reloading
 
 ### Frontend
-- *(Coming soon - details will be added as development progresses)*
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **Routing**: React Router v7
+- **State Management**: TanStack Query (React Query) for server state
+- **Form Handling**: React Hook Form with Zod validation
+- **UI Framework**: DaisyUI + Tailwind CSS
+- **Icons**: Lucide React
+- **Notifications**: React Hot Toast
+- **HTTP Client**: Axios
 
 ## 📁 Project Structure
 
@@ -37,35 +45,75 @@ streamer/
 │   │   │   └── FriendRequest.ts
 │   │   ├── routes/          # API routes
 │   │   │   ├── auth.route.ts
-│   │   │   └── user.route.ts
+│   │   │   ├── user.route.ts
+│   │   │   └── chat.routes.ts
 │   │   ├── middlewares/     # Custom middleware
-│   │   │   └── error.ts
+│   │   │   ├── error.ts
+│   │   │   └── auth.middleware.ts
 │   │   ├── validations/     # Zod schemas
 │   │   │   ├── env.ts
 │   │   │   ├── user.ts
 │   │   │   └── friendRequest.ts
 │   │   ├── lib/             # Utilities and constants
 │   │   │   ├── db.ts
-│   │   │   └── constants.ts
+│   │   │   ├── constants.ts
+│   │   │   └── stream.ts
 │   │   └── server.ts        # Application entry point
 │   ├── .env.example         # Environment variables template
 │   ├── package.json
 │   └── tsconfig.json
 └── frontend/
-    └── (Coming soon)
+    ├── src/
+    │   ├── api/             # API service layer
+    │   │   ├── axios-instance.ts
+    │   │   ├── fetch-helper.ts
+    │   │   └── user-service.ts
+    │   ├── components/      # Reusable components
+    │   │   ├── Input.tsx
+    │   │   ├── Select.tsx
+    │   │   ├── Button.tsx
+    │   │   ├── Label.tsx
+    │   │   ├── ErrorMessage.tsx
+    │   │   ├── AuthLayout.tsx
+    │   │   ├── AuthImagePattern.tsx
+    │   │   ├── AvatarSelector.tsx
+    │   │   └── LoadingSpinner.tsx
+    │   ├── hooks/           # Custom React hooks
+    │   │   └── useUserAuth.ts
+    │   ├── pages/           # Page components
+    │   │   ├── Signup.tsx
+    │   │   ├── Login.tsx
+    │   │   ├── Onboarding.tsx
+    │   │   └── Home.tsx
+    │   ├── types/           # TypeScript types
+    │   │   ├── api.ts
+    │   │   └── user.ts
+    │   ├── validations/     # Zod validation schemas
+    │   │   └── auth.ts
+    │   ├── lib/             # Utilities
+    │   │   ├── constant.ts
+    │   │   └── utils.ts
+    │   ├── App.tsx
+    │   └── main.tsx
+    ├── package.json
+    └── tsconfig.json
 ```
 
 ## ✨ Features
 
 ### Current Features
+
+#### Backend
 - ✅ User authentication (signup, login, logout)
-- ✅ Secure password hashing
-- ✅ JWT-based session management
+- ✅ Secure password hashing with bcryptjs
+- ✅ JWT-based session management with HTTP-only cookies
+- ✅ User onboarding flow
 - ✅ Input validation with Zod
-- ✅ MongoDB integration
+- ✅ MongoDB integration with Mongoose
 - ✅ Error handling middleware
 - ✅ TypeScript for type safety
 - ✅ Environment variable validation
+- ✅ Stream Chat SDK integration
 - ✅ **Friend System**
   - User recommendations (find users to connect with)
   - Send friend requests
@@ -73,6 +121,35 @@ streamer/
   - View received friend requests
   - View sent friend requests
   - View friends list with populated user details
+
+#### Frontend
+- ✅ **Authentication Pages**
+  - Signup page with avatar selection
+  - Login page
+  - Protected routes
+  - Session management with React Query
+- ✅ **Onboarding Flow**
+  - Profile completion page
+  - Language selection (native & learning)
+  - Bio input
+  - Automatic redirect if already onboarded
+  - Profile picture and name display
+- ✅ **Reusable Components**
+  - Form components (Input, Select, Button, Label)
+  - Error message handling
+  - Loading states
+  - Auth layout with split-screen design
+- ✅ **Custom Hooks**
+  - useUserAuth for authentication state
+- ✅ **Type Safety**
+  - Full TypeScript integration
+  - Zod validation schemas
+  - Type-safe API calls
+- ✅ **Modern UI/UX**
+  - DaisyUI + Tailwind CSS styling
+  - Dark theme support
+  - Responsive design
+  - Toast notifications
 
 ### Planned Features
 - 🔄 Video streaming integration
@@ -131,6 +208,31 @@ streamer/
    npm start
    ```
 
+### Frontend Setup
+
+1. **Navigate to frontend directory**
+   ```bash
+   cd streamer/frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+   
+   The app will start on `http://localhost:5173` (default Vite port)
+
+4. **Build for production**
+   ```bash
+   npm run build
+   npm run preview  # Preview production build
+   ```
+
 ## 📡 API Endpoints
 
 ### Authentication Routes
@@ -139,7 +241,9 @@ streamer/
 |--------|----------|-------------|---------------|
 | POST | `/api/auth/signup` | Register a new user | No |
 | POST | `/api/auth/login` | Login existing user | No |
-| GET | `/api/auth/logout` | Logout current user | Yes |
+| POST | `/api/auth/logout` | Logout current user | Yes |
+| POST | `/api/auth/onboarding` | Complete user onboarding | Yes |
+| GET | `/api/auth/me` | Get current user profile | Yes |
 
 ### User Routes
 
