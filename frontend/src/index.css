@@ -3,3 +3,7 @@
 @plugin "daisyui" {
   themes: all;
 }
+
+* {
+  font-size: 14px;
+}

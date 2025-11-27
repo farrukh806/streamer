@@ -12,9 +12,11 @@ import Button from "../components/Button";
 import { handleError } from "../lib/utils";
 import { UserService } from "../api/user-service";
 import toast from "react-hot-toast";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { IApiError } from "../types/api";
 
 const Signup = () => {
+    const queryClient = useQueryClient()
     const {
         register,
         handleSubmit,
@@ -32,13 +34,16 @@ const Signup = () => {
         onSuccess: (data) => {
             if (data.success) {
                 toast.success(data.message);
+                queryClient.invalidateQueries({
+                    queryKey: ['user']
+                });
                 reset();
             } else {
                 toast.error(data.message);
             }
         },
-        onError: (error) => {
-            handleError(error);
+        onError: (error: IApiError) => {
+            handleError(error.response?.data?.message);
         },
     })
 

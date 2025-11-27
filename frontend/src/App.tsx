@@ -5,15 +5,20 @@ import { useQuery } from '@tanstack/react-query'
 import { UserService } from './api/user-service'
 import LoadingSpinner from './components/LoadingSpinner'
 import { Toaster } from 'react-hot-toast'
+import { handleError } from './lib/utils'
+import type { IApiError } from './types/api'
 
 function App() {
-  const { data: user, isLoading, error } = useQuery({
+  const { data: user, isLoading } = useQuery({
     queryKey: ['user'],
     queryFn: UserService.getUserProfile,
     retry: false,
+    throwOnError: (error: IApiError) => {
+      handleError(error.response?.data?.message)
+      return false
+    }
   })
 
-  console.log(error)
   if (isLoading) return <LoadingSpinner />
 
   return (
