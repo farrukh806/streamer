@@ -7,6 +7,7 @@ export class UserService {
     private static signupEndpoint = "/auth/signup"
     private static loginEndpoint = "/auth/login"
     private static onboardingEndpoint = "/auth/onboarding"
+    private static logoutEndpoint = "/auth/logout"
 
     static getUserProfile() {
         return FetchHelper.get<IUser>(UserService.userProfileEndpoint);
@@ -22,5 +23,9 @@ export class UserService {
 
     static login(data: LoginFormData) {
         return FetchHelper.post<IUser>(UserService.loginEndpoint, data);
+    }
+
+    static logout() {
+        return FetchHelper.post(UserService.logoutEndpoint, {});
     }
 }
