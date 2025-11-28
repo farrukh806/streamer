@@ -3,6 +3,7 @@ import { Search } from 'lucide-react'
 import NotificationsDropdown from './NotificationsDropdown'
 import Sidebar from './Sidebar'
 import UserMenu from './UserMenu'
+import ThemeSelector from './ThemeSelector'
 
 interface LayoutProps {
     children: ReactNode
@@ -23,11 +24,11 @@ const Layout = ({ children }: LayoutProps) => {
                     {/* Search Bar */}
                     <div className="flex-1 max-w-xl">
                         <div className="relative">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-base-content/50" size={20} />
+                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-base-content/50 z-10" size={20} />
                             <input
                                 type="text"
                                 placeholder="Search..."
-                                className="input input-bordered w-full pl-10"
+                                className="input input-bordered w-full pl-10 focus:outline-none"
                             />
                         </div>
                     </div>
@@ -36,6 +37,9 @@ const Layout = ({ children }: LayoutProps) => {
                     <div className="flex items-center gap-4 ml-6">
                         {/* Notifications Dropdown */}
                         <NotificationsDropdown />
+
+                        {/* Theme Selector */}
+                        <ThemeSelector />
 
                         {/* User Menu Dropdown */}
                         <UserMenu />

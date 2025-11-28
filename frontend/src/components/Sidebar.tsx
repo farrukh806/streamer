@@ -25,7 +25,7 @@ const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
             {/* Sidebar Header */}
             <div className="h-16 flex items-center justify-between px-4 border-b border-base-300">
                 {isOpen && (
-                    <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    <h1 className="text-2xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
                         Streamify
                     </h1>
                 )}
@@ -48,8 +48,8 @@ const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
                             key={item.path}
                             to={item.path}
                             className={`btn btn-ghost flex items-center gap-3 justify-start ${active
-                                    ? 'bg-gradient-to-r from-primary to-secondary text-primary-content shadow-lg'
-                                    : 'text-base-content/70 hover:text-base-content'
+                                ? 'bg-linear-to-r from-primary to-secondary text-primary-content shadow-lg'
+                                : 'text-base-content/70 hover:text-base-content'
                                 }`}
                         >
                             <Icon size={22} />

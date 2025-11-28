@@ -46,9 +46,18 @@ const UserMenu = () => {
         <div className="dropdown dropdown-end" ref={menuRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="btn btn-circle bg-gradient-to-r from-primary to-secondary border-none hover:shadow-lg hover:shadow-primary/30 transition-all"
+                className={`btn btn-circle border-none hover:shadow-lg hover:shadow-primary/30 transition-all ${user?.data?.profilePicture ? 'p-0 overflow-hidden' : 'bg-linear-to-r from-primary to-secondary'
+                    }`}
             >
-                <User size={20} />
+                {user?.data?.profilePicture ? (
+                    <img
+                        src={user.data.profilePicture}
+                        alt={user.data.fullName}
+                        className="w-full h-full object-cover"
+                    />
+                ) : (
+                    <User size={20} />
+                )}
             </button>
 
             {/* User Menu Dropdown */}
