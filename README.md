@@ -69,6 +69,11 @@ streamer/
     │   │   ├── fetch-helper.ts
     │   │   └── user-service.ts
     │   ├── components/      # Reusable components
+    │   │   ├── Layout.tsx
+    │   │   ├── Sidebar.tsx
+    │   │   ├── NotificationsDropdown.tsx
+    │   │   ├── UserMenu.tsx
+    │   │   ├── ThemeSelector.tsx
     │   │   ├── Input.tsx
     │   │   ├── Select.tsx
     │   │   ├── Button.tsx
@@ -147,8 +152,12 @@ streamer/
   - Type-safe API calls
 - ✅ **Modern UI/UX**
   - DaisyUI + Tailwind CSS styling
-  - Dark theme support
-  - Responsive design
+  - **Theme System**: 32+ themes with persistent selection
+  - **Responsive Layout**: Collapsible sidebar and mobile-friendly design
+  - **Interactive Components**:
+    - Real-time notifications dropdown
+    - User menu with profile picture
+    - Search functionality
   - Toast notifications
 
 ### Planned Features
