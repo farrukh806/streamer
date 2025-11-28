@@ -41,7 +41,8 @@ const Onboarding = () => {
 
     useEffect(() => {
         if (user?.data && !isLoading) {
-            if (user.data.nativeLanguage && user.data.learningLanguage && user.data.bio) {
+            // If user is already onboarded, redirect to home
+            if (user.data.isOnboarded) {
                 navigate("/");
                 return;
             }

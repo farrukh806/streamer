@@ -103,9 +103,12 @@ async function updateFriendRequestStatus(req: Request, res: Response) {
 async function getFriendRequests(req: Request, res: Response) {
     try {
         const currentUserId = req.user._id;
-        const { sent = true } = req.query;
-        // find friend requests where current user is the recipient
-        const friendRequests = await FriendRequest.find(sent ? { sender: currentUserId, status: "pending" } : { recipient: currentUserId, status: "pending" }).populate("sender", "fullName profilePicture learningLanguage nativeLanguage");
+        const { type = 'sent' } = req.query;
+        // type can be 'sent' or 'incoming'
+        const isSent = type === 'sent';
+        // find friend requests where current user is the sender (if type=sent) or recipient (if type=incoming)
+        const friendRequests = await FriendRequest.find(isSent ? { sender: currentUserId, status: "pending" } : { recipient: currentUserId, status: "pending" })
+            .populate(isSent ? "recipient" : "sender", "fullName profilePicture learningLanguage nativeLanguage");
         return res.status(200).json({ message: "Friend requests fetched successfully", data: friendRequests, success: true });
     } catch (error) {
         // throw error as error middleware will handle it 

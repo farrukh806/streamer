@@ -10,3 +10,12 @@ export interface IUser {
     friends: Array<string>
     _id: string;
 }
+
+export interface IFriendRequest {
+    _id: string;
+    sender: string | IUser;
+    recipient: string | IUser;
+    status: "pending" | "accepted" | "rejected";
+    createdAt: string;
+    updatedAt: string;
+}

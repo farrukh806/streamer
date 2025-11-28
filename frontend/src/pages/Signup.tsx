@@ -14,9 +14,11 @@ import { UserService } from "../api/user-service";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { IApiError } from "../types/api";
+import { useNavigate } from "react-router";
 
 const Signup = () => {
     const queryClient = useQueryClient()
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -38,6 +40,8 @@ const Signup = () => {
                     queryKey: ['user']
                 });
                 reset();
+                // New users should go to onboarding
+                navigate("/onboarding");
             } else {
                 toast.error(data.message);
             }

@@ -7,19 +7,56 @@ import LoadingSpinner from './components/LoadingSpinner'
 import { Toaster } from 'react-hot-toast'
 import useUserAuth from './hooks/useUserAuth'
 import Layout from './components/Layout'
+import Home from './pages/Home'
 function App() {
   const { user, isLoading } = useUserAuth()
 
   if (isLoading) return <LoadingSpinner />
 
+  // Check if user is authenticated and onboarded
+  const isAuthenticated = !!user?.data
+  const isOnboarded = user?.data?.isOnboarded ?? false
+
   return (
     <section className='h-screen'>
       <Toaster position='top-center' />
       <Routes>
-        <Route path="/" element={<Layout><h1 className='font-extrabold text-xl text-red-500' data-theme="night">Streamify</h1></Layout>} />
-        <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
-        <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
-        <Route path="/onboarding" element={user ? <Onboarding /> : <Navigate to="/login" />} />
+        <Route 
+          path="/" 
+          element={
+            isAuthenticated ? (
+              isOnboarded ? (
+                <Layout><Home /></Layout>
+              ) : (
+                <Navigate to="/onboarding" replace />
+              )
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          } 
+        />
+        <Route 
+          path="/signup" 
+          element={isAuthenticated ? <Navigate to={isOnboarded ? "/" : "/onboarding"} replace /> : <Signup />} 
+        />
+        <Route 
+          path="/login" 
+          element={isAuthenticated ? <Navigate to={isOnboarded ? "/" : "/onboarding"} replace /> : <Login />} 
+        />
+        <Route 
+          path="/onboarding" 
+          element={
+            isAuthenticated ? (
+              isOnboarded ? (
+                <Navigate to="/" replace />
+              ) : (
+                <Onboarding />
+              )
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          } 
+        />
       </Routes>
     </section>
   )

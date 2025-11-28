@@ -19,4 +19,12 @@ export class FetchHelper {
         }
         return response.data;
     }
+
+    static async put<T>(url: string, data: any, options?: AxiosRequestConfig): Promise<IApiResponse<T>> {
+        const response = await axiosInstance.put(url, data, options);
+        if (!response.status) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.data;
+    }
 }

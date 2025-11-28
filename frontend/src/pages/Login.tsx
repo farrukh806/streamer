@@ -33,7 +33,12 @@ const Login = () => {
         queryClient.invalidateQueries({
           queryKey: ['user']
         });
-        navigate("/");
+        // Check if user needs onboarding
+        if (data.data && !data.data.isOnboarded) {
+          navigate("/onboarding");
+        } else {
+          navigate("/");
+        }
       } else {
         toast.error(data.message);
       }
