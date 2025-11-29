@@ -4,6 +4,7 @@ import { Users, UserPlus } from 'lucide-react'
 import LoadingSpinner from './LoadingSpinner'
 import { handleError } from '../lib/utils'
 import UserCard from './UserCard'
+import Button from './Button'
 
 const FriendList = () => {
     const { data: friends, isLoading } = useQuery({
@@ -15,13 +16,13 @@ const FriendList = () => {
         },
     })
 
-    if (isLoading) return <LoadingSpinner />    
+    if (isLoading) return <LoadingSpinner />
 
     if (!friends?.data || friends.data.length === 0) {
         return (
             <div className="space-y-4">
                 <h2 className="text-xl font-bold">Friends</h2>
-                
+
                 <div className="card bg-base-200 border border-base-300 shadow-sm">
                     <div className="card-body items-center text-center py-12 px-6">
                         <div className="avatar placeholder mb-4">
@@ -29,12 +30,12 @@ const FriendList = () => {
                                 <Users size={48} className="text-base-content/40" />
                             </div>
                         </div>
-                        
+
                         <h3 className="text-xl font-bold mb-2">No friends yet</h3>
                         <p className="text-base-content/60 max-w-md mb-6">
                             Start building your language learning network! Connect with other learners to practice together and improve your skills.
                         </p>
-                        
+
                         <div className="flex items-center gap-2 text-sm text-base-content/50">
                             <UserPlus size={16} />
                             <span>Scroll down to discover recommended users</span>
@@ -55,9 +56,9 @@ const FriendList = () => {
                         key={friend._id}
                         user={friend}
                         actionButton={
-                            <button className="btn btn-outline btn-block btn-sm rounded-full hover:bg-base-content hover:text-base-100">
+                            <Button className="btn btn-outline btn-block btn-sm rounded-full hover:bg-base-content hover:text-base-100">
                                 Message
-                            </button>
+                            </Button>
                         }
                     />
                 ))}

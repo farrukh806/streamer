@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { AVATAR_OPTIONS } from "../lib/constant";
 import ErrorMessage from "./ErrorMessage";
+import Button from "./Button";
 
 interface AvatarSelectorProps {
     value?: string;
@@ -30,13 +31,13 @@ const AvatarSelector = ({ value, onChange, error }: AvatarSelectorProps) => {
                         <img src={value || preview} alt="Avatar Preview" />
                     </div>
                 </div>
-                <button
+                <Button
                     type="button"
                     className="btn btn-outline btn-sm"
                     onClick={() => modalRef.current?.showModal()}
                 >
                     Choose Avatar
-                </button>
+                </Button>
             </div>
 
             <ErrorMessage error={error?.message} />
@@ -46,7 +47,7 @@ const AvatarSelector = ({ value, onChange, error }: AvatarSelectorProps) => {
                     <h3 className="font-bold text-lg mb-4">Select an Avatar</h3>
                     <div className="grid grid-cols-4 sm:grid-cols-6 gap-4 max-h-96 overflow-y-auto p-2">
                         {AVATAR_OPTIONS.map((url, index) => (
-                            <button
+                            <Button
                                 key={index}
                                 type="button"
                                 className={`avatar hover:scale-110 transition-transform ${value === url ? "ring ring-primary rounded-full" : ""}`}
@@ -55,15 +56,15 @@ const AvatarSelector = ({ value, onChange, error }: AvatarSelectorProps) => {
                                 <div className="w-full rounded-full">
                                     <img src={url} alt={`Avatar ${index + 1}`} loading="lazy" />
                                 </div>
-                            </button>
+                            </Button>
                         ))}
                     </div>
                     <div className="modal-action">
-                        <button type="button" className="btn" onClick={() => modalRef.current?.close()}>Close</button>
+                        <Button type="button" className="btn" onClick={() => modalRef.current?.close()}>Close</Button>
                     </div>
                 </div>
                 <div className="modal-backdrop" onClick={() => modalRef.current?.close()}>
-                    <button type="button">close</button>
+                    <Button type="button">close</Button>
                 </div>
             </dialog>
         </div>

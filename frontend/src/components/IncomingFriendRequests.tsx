@@ -7,6 +7,7 @@ import LoadingSpinner from './LoadingSpinner'
 import { handleError } from '../lib/utils'
 import UserCard from './UserCard'
 import type { IFriendRequest } from '../types/user'
+import Button from './Button'
 
 const IncomingFriendRequests = () => {
     const queryClient = useQueryClient()
@@ -22,7 +23,7 @@ const IncomingFriendRequests = () => {
     })
 
     const acceptMutation = useMutation({
-        mutationFn: (friendRequestId: string) => 
+        mutationFn: (friendRequestId: string) =>
             UserService.updateFriendRequestStatus(friendRequestId, 'accepted'),
         onSuccess: () => {
             toast.success('Friend request accepted!')
@@ -37,7 +38,7 @@ const IncomingFriendRequests = () => {
     })
 
     const rejectMutation = useMutation({
-        mutationFn: (friendRequestId: string) => 
+        mutationFn: (friendRequestId: string) =>
             UserService.updateFriendRequestStatus(friendRequestId, 'rejected'),
         onSuccess: () => {
             toast.success('Friend request rejected')
@@ -95,7 +96,7 @@ const IncomingFriendRequests = () => {
                             showBio={true}
                             actionButton={
                                 <div className="flex gap-2">
-                                    <button
+                                    <Button
                                         onClick={() => handleAccept(request._id)}
                                         disabled={processingRequestId === request._id}
                                         className="btn btn-success btn-sm flex-1 rounded-full text-white hover:bg-success/90 border-none disabled:opacity-50 disabled:cursor-not-allowed"
@@ -108,8 +109,8 @@ const IncomingFriendRequests = () => {
                                                 Accept
                                             </>
                                         )}
-                                    </button>
-                                    <button
+                                    </Button>
+                                    <Button
                                         onClick={() => handleReject(request._id)}
                                         disabled={processingRequestId === request._id}
                                         className="btn btn-error btn-sm flex-1 rounded-full text-white hover:bg-error/90 border-none disabled:opacity-50 disabled:cursor-not-allowed"
@@ -122,7 +123,7 @@ const IncomingFriendRequests = () => {
                                                 Reject
                                             </>
                                         )}
-                                    </button>
+                                    </Button>
                                 </div>
                             }
                         />

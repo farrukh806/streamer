@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router'
 import { Home, Users, Bell, Settings, Menu, X } from 'lucide-react'
+import Button from './Button'
 
 interface SidebarProps {
     isOpen: boolean
@@ -29,12 +30,12 @@ const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
                         Streamify
                     </h1>
                 )}
-                <button
+                <Button
                     onClick={onToggle}
                     className="btn btn-ghost btn-sm btn-square"
                 >
                     {isOpen ? <X size={20} /> : <Menu size={20} />}
-                </button>
+                </Button>
             </div>
 
             {/* Navigation Items */}

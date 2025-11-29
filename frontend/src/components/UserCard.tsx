@@ -52,7 +52,7 @@ const UserCard = ({ user, actionButton, showBio = false }: UserCardProps) => {
 
                 {/* Bio */}
                 {showBio && (
-                    <div className="mb-4 min-h-[3rem]">
+                    <div className="mb-4 min-h-12">
                         <p className="text-sm text-base-content/60 line-clamp-2">
                             {user.bio || "No bio available"}
                         </p>

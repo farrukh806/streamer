@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import useUserAuth from '../hooks/useUserAuth'
 import { UserService } from '../api/user-service'
+import Button from './Button'
 
 const UserMenu = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -44,7 +45,7 @@ const UserMenu = () => {
 
     return (
         <div className="dropdown dropdown-end" ref={menuRef}>
-            <button
+            <Button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`btn btn-circle border-none hover:shadow-lg hover:shadow-primary/30 transition-all ${user?.data?.profilePicture ? 'p-0 overflow-hidden' : 'bg-linear-to-r from-primary to-secondary'
                     }`}
@@ -58,7 +59,7 @@ const UserMenu = () => {
                 ) : (
                     <User size={20} />
                 )}
-            </button>
+            </Button>
 
             {/* User Menu Dropdown */}
             {isOpen && (
@@ -79,7 +80,7 @@ const UserMenu = () => {
                             </Link>
                         </li>
                         <li>
-                            <button
+                            <Button
                                 onClick={() => {
                                     setIsOpen(false)
                                     handleLogout()
@@ -91,7 +92,7 @@ const UserMenu = () => {
                                 <span>
                                     {logoutMutation.isPending ? 'Logging out...' : 'Logout'}
                                 </span>
-                            </button>
+                            </Button>
                         </li>
                     </ul>
                 </div>

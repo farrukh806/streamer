@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { Bell, UserPlus, Video, TrendingUp, MessageCircle, X } from 'lucide-react'
+import Button from './Button'
 
 interface Notification {
     id: number
@@ -52,7 +53,7 @@ const NotificationsDropdown = () => {
 
     return (
         <div className="dropdown dropdown-end" ref={dropdownRef}>
-            <button
+            <Button
                 onClick={() => setIsOpen(!isOpen)}
                 className="btn btn-ghost btn-circle relative indicator"
             >
@@ -60,7 +61,7 @@ const NotificationsDropdown = () => {
                 {unreadCount > 0 && (
                     <span className="indicator-item badge badge-secondary badge-sm">{unreadCount}</span>
                 )}
-            </button>
+            </Button>
 
             {/* Notifications Dropdown Menu */}
             {isOpen && (
@@ -74,12 +75,12 @@ const NotificationsDropdown = () => {
                                     <p className="text-xs text-base-content/60">{unreadCount} unread</p>
                                 )}
                             </div>
-                            <button
+                            <Button
                                 onClick={() => setIsOpen(false)}
                                 className="btn btn-ghost btn-sm btn-circle"
                             >
                                 <X size={18} />
-                            </button>
+                            </Button>
                         </div>
 
                         {/* Notifications List */}
@@ -126,9 +127,9 @@ const NotificationsDropdown = () => {
                         {/* Footer */}
                         {sampleNotifications.length > 0 && (
                             <div className="p-3 border-t border-base-300 bg-base-300/30">
-                                <button className="btn btn-ghost btn-sm w-full text-primary hover:bg-primary/10">
+                                <Button className="btn btn-ghost btn-sm w-full text-primary hover:bg-primary/10">
                                     View all notifications
-                                </button>
+                                </Button>
                             </div>
                         )}
                     </div>
