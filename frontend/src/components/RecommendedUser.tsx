@@ -1,5 +1,5 @@
 import UserCard from './UserCard'
-import { type IUser } from '../types/user'
+import { type IUser } from '../types/user-types'
 import Button from './Button'
 import LoadingSpinner from './LoadingSpinner'
 import { Check, UserPlus, X } from 'lucide-react'

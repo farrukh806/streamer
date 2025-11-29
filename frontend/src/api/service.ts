@@ -1,6 +1,6 @@
 import type { SignupFormData, OnboardingFormData, LoginFormData } from "../validations/auth";
 import { FetchHelper } from "./fetch-helper";
-import type { IUser, IFriendRequest } from "../types/user";
+import type { IUser, IFriendRequest } from "../types/user-types";
 
 export class UserService {
     private static userProfileEndpoint = "/auth/me"

@@ -6,9 +6,10 @@ import toast from 'react-hot-toast'
 import LoadingSpinner from './LoadingSpinner'
 import { handleError } from '../lib/utils'
 import UserCard from './UserCard'
-import type { IFriendRequest } from '../types/user'
+import type { IFriendRequest } from '../types/user-types'
 import Button from './Button'
 import { QUERY_KEYS } from '../constants/query-keys'
+import type { IApiError } from '../types/api'
 
 const IncomingFriendRequests = () => {
     const queryClient = useQueryClient()
@@ -32,7 +33,7 @@ const IncomingFriendRequests = () => {
             queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.INCOMING_FRIEND_REQUESTS] })
             queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.FRIENDS] })
         },
-        onError: (error: any) => {
+        onError: (error: IApiError) => {
             setProcessingRequestId(null)
             handleError(error.response?.data?.message || 'Failed to accept friend request')
         }
@@ -47,7 +48,7 @@ const IncomingFriendRequests = () => {
             queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.INCOMING_FRIEND_REQUESTS] })
             queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.SENT_FRIEND_REQUESTS] })
         },
-        onError: (error: any) => {
+        onError: (error: IApiError) => {
             setProcessingRequestId(null)
             handleError(error.response?.data?.message || 'Failed to reject friend request')
         }

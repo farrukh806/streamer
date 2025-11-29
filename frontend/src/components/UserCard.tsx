@@ -1,6 +1,6 @@
 import { User } from 'lucide-react'
 import { getFlagUrl } from '../lib/utils'
-import type { IUser } from '../types/user'
+import type { IUser } from '../types/user-types'
 
 interface UserCardProps {
     user: IUser

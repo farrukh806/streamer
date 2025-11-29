@@ -589,6 +589,18 @@ The application features a modern, intuitive interface with:
 - Real-time chat interface
 - Video call capabilities
 
+### Home Page
+![Home Page](./frontend/public/home.png)
+*Dashboard showing friend requests, recommendations, and friends list*
+
+### Chat Interface
+![Chat Interface](./frontend/public/chat.png)
+*Real-time messaging with Stream Chat integration, featuring message history and user profiles*
+
+### Video Calling
+![Video Call](./frontend/public/video-call.png)
+*High-quality video calling interface powered by Stream Video*
+
 Visit the [live demo](https://streamer-0dmt.onrender.com) to see it in action!
 
 ## 🤝 Contributing

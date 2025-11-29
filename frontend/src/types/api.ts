@@ -6,4 +6,4 @@ export interface IApiResponse<T> {
     message: string;
 }
 
-export interface IApiError extends AxiosError<{ message: string }> { }
+export type IApiError = AxiosError<{ message: string }>
