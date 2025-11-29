@@ -8,6 +8,8 @@ import useUserAuth from '../hooks/useUserAuth';
 import { handleError } from '../lib/utils';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Chat as ChatProvider, Channel as ChannelProvider, Window, ChannelHeader, MessageList, MessageInput } from 'stream-chat-react';
+import VideoCallButton from '../components/VideoCallButton';
+import toast from 'react-hot-toast';
 
 const STREAM_APP_KEY = import.meta.env.VITE_STREAM_APP_KEY;
 
@@ -25,7 +27,7 @@ const Chat = () => {
   });
 
   const initChat = useCallback(async () => {
-    if (!data?.data || !user?.data || !id) return;
+    if (!data?.data || !user?.data || !id || channel || chatClient) return;
     setLoading(true);
     try {
       const client = StreamChat.getInstance(STREAM_APP_KEY);
@@ -47,12 +49,22 @@ const Chat = () => {
     } finally {
       setLoading(false);
     }
-  }, [data, user, id]);
+  }, [data, user, id, channel, chatClient]);
 
   useEffect(() => {
     if (!id) navigate("/");
     initChat();
   }, [initChat, id, navigate]);
+
+  const handleVideoCall = useCallback(() => {
+    if (channel) {
+      const callUrl = `${window.location.origin}/call/${channel.id}`;
+      channel.sendMessage({ text: `${user?.data.fullName} started a video call: Join now:  ${callUrl}` });
+      toast.success('Video call link sent in the chat!');
+    } else {
+      toast.error('Channel is not ready for video call.');
+    }
+  }, [channel, user]);
 
 
   if (isLoading || loading || !chatClient || !channel) return <LoadingSpinner />;
@@ -61,6 +73,7 @@ const Chat = () => {
       <ChannelProvider channel={channel}>
         {/* Chat UI components go here */}
         <div className='w-full relative'>
+          <VideoCallButton handleVideoCall={handleVideoCall} />
           <Window>
             <ChannelHeader />
             <MessageList />

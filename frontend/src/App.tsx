@@ -10,6 +10,7 @@ import Layout from './components/Layout'
 import Home from './pages/Home'
 import Chat from './pages/Chat'
 import Friends from './pages/Friends'
+import Call from './pages/Call'
 function App() {
   const { user, isLoading } = useUserAuth()
 
@@ -47,6 +48,20 @@ function App() {
             isAuthenticated ? (
               isOnboarded ? (
                 <Layout><Chat /></Layout>
+              ) : (
+                <Navigate to="/onboarding" replace />
+              )
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        <Route
+          path="/call/:id"
+          element={
+            isAuthenticated ? (
+              isOnboarded ? (
+                <Layout><Call /></Layout>
               ) : (
                 <Navigate to="/onboarding" replace />
               )
