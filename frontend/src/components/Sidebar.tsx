@@ -24,7 +24,7 @@ const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
             <div className="h-16 flex items-center justify-between px-4 border-b border-base-300">
                 {isOpen && (
                     <h1 className="text-2xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-                        Streamify
+                        Streamer
                     </h1>
                 )}
                 <button

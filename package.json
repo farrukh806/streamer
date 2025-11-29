@@ -1,0 +1,23 @@
+{
+  "name": "streamer",
+  "version": "1.0.0",
+  "description": "> **⚠️ Project Status: In Progress**\r > \r > This project is currently under active development. More comprehensive documentation, features, and setup instructions will be added as the project progresses.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm i --prefix backend && npm i --prefix frontend && npm run build --prefix backend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend & npm run preview --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farrukh806/streamer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/farrukh806/streamer/issues"
+  },
+  "homepage": "https://github.com/farrukh806/streamer#readme"
+}
