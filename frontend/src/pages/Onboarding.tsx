@@ -15,13 +15,14 @@ import type { IApiError } from "../types/api";
 import { LANGUAGES } from "../lib/constant";
 import { useNavigate } from "react-router";
 import { useEffect, useMemo } from "react";
+import { QUERY_KEYS } from "../constants/query-keys";
 
 const Onboarding = () => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
     const { data: user, isLoading } = useQuery({
-        queryKey: ['user'],
+        queryKey: [QUERY_KEYS.USER],
         queryFn: UserService.getUserProfile,
     });
 
@@ -58,7 +59,7 @@ const Onboarding = () => {
             if (data.success) {
                 toast.success(data.message);
                 queryClient.invalidateQueries({
-                    queryKey: ['user']
+                    queryKey: [QUERY_KEYS.USER]
                 });
                 navigate("/");
             } else {

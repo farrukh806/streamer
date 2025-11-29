@@ -5,10 +5,11 @@ import LoadingSpinner from './LoadingSpinner'
 import { handleError } from '../lib/utils'
 import UserCard from './UserCard'
 import Button from './Button'
+import { QUERY_KEYS } from '../constants/query-keys'
 
 const FriendList = () => {
     const { data: friends, isLoading } = useQuery({
-        queryKey: ['friends'],
+        queryKey: [QUERY_KEYS.FRIENDS],
         queryFn: UserService.getFriends,
         throwOnError: (error) => {
             handleError(error)

@@ -17,9 +17,12 @@ const UserMenu = () => {
     const logoutMutation = useMutation({
         mutationFn: UserService.logout,
         onSuccess: () => {
-            queryClient.setQueryData(['user'], null)
             toast.success('Logged out successfully')
             navigate('/login')
+            // Clear all query caches after navigation to prevent data leakage between users
+            setTimeout(() => {
+                queryClient.clear()
+            }, 0)
         },
         onError: () => {
             toast.error('Failed to logout')

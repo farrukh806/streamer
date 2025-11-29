@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { IApiError } from "../types/api";
 import { useNavigate } from "react-router";
+import { QUERY_KEYS } from "../constants/query-keys";
 
 const Signup = () => {
     const queryClient = useQueryClient()
@@ -37,7 +38,7 @@ const Signup = () => {
             if (data.success) {
                 toast.success(data.message);
                 queryClient.invalidateQueries({
-                    queryKey: ['user']
+                    queryKey: [QUERY_KEYS.USER]
                 });
                 reset();
                 // New users should go to onboarding

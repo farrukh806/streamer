@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { IApiError } from "../types/api";
 import { Link, useNavigate } from "react-router";
+import { QUERY_KEYS } from "../constants/query-keys";
 
 const Login = () => {
   const queryClient = useQueryClient();
@@ -27,12 +28,15 @@ const Login = () => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: UserService.login,
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       if (data.success) {
         toast.success(data.message);
-        queryClient.invalidateQueries({
-          queryKey: ['user']
-        });
+        await Promise.all([
+          queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.USER] }),
+          queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.INCOMING_FRIEND_REQUESTS] }),
+          queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.FRIENDS] }),
+        ]);
+
         // Check if user needs onboarding
         if (data.data && !data.data.isOnboarded) {
           navigate("/onboarding");

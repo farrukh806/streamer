@@ -8,13 +8,14 @@ import { handleError } from '../lib/utils'
 import UserCard from './UserCard'
 import type { IFriendRequest } from '../types/user'
 import Button from './Button'
+import { QUERY_KEYS } from '../constants/query-keys'
 
 const IncomingFriendRequests = () => {
     const queryClient = useQueryClient()
     const [processingRequestId, setProcessingRequestId] = useState<string | null>(null)
 
     const { data: incomingRequests, isLoading } = useQuery({
-        queryKey: ['incoming-friend-requests'],
+        queryKey: [QUERY_KEYS.INCOMING_FRIEND_REQUESTS],
         queryFn: UserService.getIncomingFriendRequests,
         throwOnError: (error) => {
             handleError(error)
@@ -28,8 +29,8 @@ const IncomingFriendRequests = () => {
         onSuccess: () => {
             toast.success('Friend request accepted!')
             setProcessingRequestId(null)
-            queryClient.invalidateQueries({ queryKey: ['incoming-friend-requests'] })
-            queryClient.invalidateQueries({ queryKey: ['friends'] })
+            queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.INCOMING_FRIEND_REQUESTS] })
+            queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.FRIENDS] })
         },
         onError: (error: any) => {
             setProcessingRequestId(null)
@@ -43,7 +44,8 @@ const IncomingFriendRequests = () => {
         onSuccess: () => {
             toast.success('Friend request rejected')
             setProcessingRequestId(null)
-            queryClient.invalidateQueries({ queryKey: ['incoming-friend-requests'] })
+            queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.INCOMING_FRIEND_REQUESTS] })
+            queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.SENT_FRIEND_REQUESTS] })
         },
         onError: (error: any) => {
             setProcessingRequestId(null)

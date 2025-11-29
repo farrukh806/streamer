@@ -107,7 +107,11 @@ async function getFriendRequests(req: Request, res: Response) {
         // type can be 'sent' or 'incoming'
         const isSent = type === 'sent';
         // find friend requests where current user is the sender (if type=sent) or recipient (if type=incoming)
-        const friendRequests = await FriendRequest.find(isSent ? { sender: currentUserId, status: "pending" } : { recipient: currentUserId, status: "pending" })
+        // find friend requests where current user is the sender (if type=sent) or recipient (if type=incoming)
+        // If type is sent, we want to see all requests (pending, accepted, rejected)
+        // If type is incoming, we only want to see pending requests
+        const query = isSent ? { sender: currentUserId } : { recipient: currentUserId, status: "pending" };
+        const friendRequests = await FriendRequest.find(query)
             .populate(isSent ? "recipient" : "sender", "fullName profilePicture learningLanguage nativeLanguage");
         return res.status(200).json({ message: "Friend requests fetched successfully", data: friendRequests, success: true });
     } catch (error) {
