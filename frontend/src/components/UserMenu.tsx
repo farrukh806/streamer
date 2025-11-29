@@ -72,16 +72,6 @@ const UserMenu = () => {
                     </div>
                     <ul className="p-2">
                         <li>
-                            <Link
-                                to="/settings"
-                                className="flex items-center gap-3"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                <Settings size={18} />
-                                <span>Settings</span>
-                            </Link>
-                        </li>
-                        <li>
                             <button
                                 onClick={() => {
                                     setIsOpen(false)

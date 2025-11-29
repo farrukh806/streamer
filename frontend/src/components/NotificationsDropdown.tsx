@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { Bell, UserPlus, Video, TrendingUp, MessageCircle, X } from 'lucide-react'
 import { useNavigate } from 'react-router'
-import Button from './Button'
 
 interface Notification {
     id: number
@@ -55,7 +54,7 @@ const NotificationsDropdown = () => {
 
     return (
         <div className="dropdown dropdown-end" ref={dropdownRef}>
-            <Button
+            <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="btn btn-ghost btn-circle relative indicator"
             >
@@ -63,7 +62,7 @@ const NotificationsDropdown = () => {
                 {unreadCount > 0 && (
                     <span className="indicator-item badge badge-secondary badge-sm">{unreadCount}</span>
                 )}
-            </Button>
+            </button>
 
             {/* Notifications Dropdown Menu */}
             {isOpen && (
@@ -77,12 +76,12 @@ const NotificationsDropdown = () => {
                                     <p className="text-xs text-base-content/60">{unreadCount} unread</p>
                                 )}
                             </div>
-                            <Button
+                            <button
                                 onClick={() => setIsOpen(false)}
                                 className="btn btn-ghost btn-sm btn-circle"
                             >
                                 <X size={18} />
-                            </Button>
+                            </button>
                         </div>
 
                         {/* Notifications List */}
@@ -129,7 +128,7 @@ const NotificationsDropdown = () => {
                         {/* Footer */}
                         {sampleNotifications.length > 0 && (
                             <div className="p-3 border-t border-base-300 bg-base-300/30">
-                                <Button
+                                <button
                                     onClick={() => {
                                         setIsOpen(false)
                                         navigate('/notifications')
@@ -137,7 +136,7 @@ const NotificationsDropdown = () => {
                                     className="btn btn-ghost btn-sm w-full text-primary hover:bg-primary/10"
                                 >
                                     View all notifications
-                                </Button>
+                                </button>
                             </div>
                         )}
                     </div>
