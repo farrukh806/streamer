@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router'
-import { User, Settings, LogOut } from 'lucide-react'
+import { useNavigate } from 'react-router'
+import { User, LogOut } from 'lucide-react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import useUserAuth from '../hooks/useUserAuth'
-import { UserService } from '../api/user-service'
+import { UserService } from '../api/service'
 
 const UserMenu = () => {
     const [isOpen, setIsOpen] = useState(false)

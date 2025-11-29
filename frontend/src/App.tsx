@@ -8,7 +8,8 @@ import { Toaster } from 'react-hot-toast'
 import useUserAuth from './hooks/useUserAuth'
 import Layout from './components/Layout'
 import Home from './pages/Home'
-import Notifications from './pages/Notifications'
+import Chat from './pages/Chat'
+import Friends from './pages/Friends'
 function App() {
   const { user, isLoading } = useUserAuth()
 
@@ -37,11 +38,15 @@ function App() {
           }
         />
         <Route
-          path="/notifications"
+          path="/signup"
+          element={isAuthenticated ? <Navigate to={isOnboarded ? "/" : "/onboarding"} replace /> : <Signup />}
+        />
+        <Route
+          path="/chat/:id"
           element={
             isAuthenticated ? (
               isOnboarded ? (
-                <Layout><Notifications /></Layout>
+                <Layout><Chat /></Layout>
               ) : (
                 <Navigate to="/onboarding" replace />
               )
@@ -51,8 +56,18 @@ function App() {
           }
         />
         <Route
-          path="/signup"
-          element={isAuthenticated ? <Navigate to={isOnboarded ? "/" : "/onboarding"} replace /> : <Signup />}
+          path="/friends"
+          element={
+            isAuthenticated ? (
+              isOnboarded ? (
+                <Layout><Friends /></Layout>
+              ) : (
+                <Navigate to="/onboarding" replace />
+              )
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
         />
         <Route
           path="/login"

@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router'
-import { Home, Users, Bell, Menu, X } from 'lucide-react'
+import { Home, Users, Menu, X } from 'lucide-react'
 
 interface SidebarProps {
     isOpen: boolean
@@ -12,7 +12,6 @@ const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
     const navItems = [
         { name: 'Home', icon: Home, path: '/' },
         { name: 'Friends', icon: Users, path: '/friends' },
-        { name: 'Notifications', icon: Bell, path: '/notifications' },
     ]
 
     const isActive = (path: string) => location.pathname === path

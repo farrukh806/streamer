@@ -13,7 +13,7 @@ export class UserService {
     private static sendFriendRequestEndpoint = "/user/send-friend-request"
     private static friendRequestsEndpoint = "/user/friend-requests"
     private static updateFriendRequestStatusEndpoint = "/user/update-friend-request-status"
-
+    private static streamChatTokenEndpoint = "/chat/stream-token"
     static getUserProfile() {
         return FetchHelper.get<IUser>(UserService.userProfileEndpoint);
     }
@@ -56,5 +56,9 @@ export class UserService {
 
     static updateFriendRequestStatus(friendRequestId: string, status: "accepted" | "rejected") {
         return FetchHelper.put(`${UserService.updateFriendRequestStatusEndpoint}/${friendRequestId}`, { status });
+    }
+
+    static getStreamChatToken() {
+        return FetchHelper.get<string>(UserService.streamChatTokenEndpoint);
     }
 }

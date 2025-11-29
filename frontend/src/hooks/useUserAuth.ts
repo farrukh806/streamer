@@ -1,4 +1,4 @@
-import { UserService } from '../api/user-service';
+import { UserService } from '../api/service';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '../constants/query-keys';
 import { useLocation } from 'react-router';

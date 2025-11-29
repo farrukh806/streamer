@@ -1,10 +1,10 @@
-import FriendList from '../components/FriendList'
+// ...existing code...
 import RecommendedUsers from '../components/RecommendedUsers'
 import IncomingFriendRequests from '../components/IncomingFriendRequests'
 
 const Home = () => {
   return (
-    <div className="container mx-auto max-w-7xl space-y-12 pb-12">
+    <div className="container mx-auto max-w-7xl space-y-12 p-6">
       {/* Welcome Section */}
       <div className="bg-linear-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 mb-8">
         <h1 className="text-3xl font-bold mb-2">Welcome back! 👋</h1>
@@ -20,12 +20,7 @@ const Home = () => {
 
       <div className="divider"></div>
 
-      {/* Friend List Section */}
-      <section>
-        <FriendList />
-      </section>
-
-      <div className="divider"></div>
+      {/* ...existing code... */}
 
       {/* Recommended Users Section */}
       <section>

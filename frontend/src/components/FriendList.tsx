@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import { UserService } from '../api/user-service'
+import { UserService } from '../api/service'
 import { Users, UserPlus } from 'lucide-react'
 import LoadingSpinner from './LoadingSpinner'
 import { handleError } from '../lib/utils'
 import UserCard from './UserCard'
-import Button from './Button'
 import { QUERY_KEYS } from '../constants/query-keys'
+import { Link } from 'react-router'
 
 const FriendList = () => {
     const { data: friends, isLoading } = useQuery({
@@ -57,9 +57,9 @@ const FriendList = () => {
                         key={friend._id}
                         user={friend}
                         actionButton={
-                            <Button className="btn btn-outline btn-block btn-sm rounded-full hover:bg-base-content hover:text-base-100">
+                            <Link to={`/chat/${friend._id}`} className="btn btn-outline btn-block btn-sm rounded-full hover:bg-base-content hover:text-base-100">
                                 Message
-                            </Button>
+                            </Link>
                         }
                     />
                 ))}

@@ -38,7 +38,7 @@ const UserCard = ({ user, actionButton, showBio = false }: UserCardProps) => {
                             alt={user.nativeLanguage}
                             className="w-4 h-3 object-cover rounded-sm"
                         />
-                        <span>Native: {user.nativeLanguage.toLowerCase()}</span>
+                        <span>Native: {user.nativeLanguage}</span>
                     </div>
                     <div className="badge badge-outline gap-1 p-3 text-xs font-medium border-base-content/20">
                         <img 
@@ -46,7 +46,7 @@ const UserCard = ({ user, actionButton, showBio = false }: UserCardProps) => {
                             alt={user.learningLanguage}
                             className="w-4 h-3 object-cover rounded-sm"
                         />
-                        <span>Learning: {user.learningLanguage.toLowerCase()}</span>
+                        <span>Learning: {user.learningLanguage}</span>
                     </div>
                 </div>
 

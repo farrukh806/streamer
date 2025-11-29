@@ -1,6 +1,5 @@
 import { type ReactNode, useState } from 'react'
 import { Search } from 'lucide-react'
-import NotificationsDropdown from './NotificationsDropdown'
 import Sidebar from './Sidebar'
 import UserMenu from './UserMenu'
 import ThemeSelector from './ThemeSelector'
@@ -35,9 +34,6 @@ const Layout = ({ children }: LayoutProps) => {
 
                     {/* Right Side Actions */}
                     <div className="flex items-center gap-4 ml-6">
-                        {/* Notifications Dropdown */}
-                        <NotificationsDropdown />
-
                         {/* Theme Selector */}
                         <ThemeSelector />
 
@@ -48,9 +44,7 @@ const Layout = ({ children }: LayoutProps) => {
 
                 {/* Content Area */}
                 <main className="flex-1 overflow-auto bg-base-100">
-                    <div className="p-6">
-                        {children}
-                    </div>
+                    {children}
                 </main>
             </div>
         </div>

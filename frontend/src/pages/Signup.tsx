@@ -10,7 +10,7 @@ import { Link } from "react-router";
 import { MessageSquare, User, Mail, Lock } from "lucide-react";
 import Button from "../components/Button";
 import { handleError } from "../lib/utils";
-import { UserService } from "../api/user-service";
+import { UserService } from "../api/service";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { IApiError } from "../types/api";

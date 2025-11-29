@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { UserService } from '../api/user-service'
+import { UserService } from '../api/service'
 import LoadingSpinner from './LoadingSpinner'
 import { handleError } from '../lib/utils'
 import RecommendedUser from './RecommendedUser'

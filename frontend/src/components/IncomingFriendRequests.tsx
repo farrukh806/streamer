@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
-import { UserService } from '../api/user-service'
+import { UserService } from '../api/service'
 import { Check, X } from 'lucide-react'
 import toast from 'react-hot-toast'
 import LoadingSpinner from './LoadingSpinner'

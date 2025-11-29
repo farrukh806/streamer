@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
 import { Palette, Check } from 'lucide-react'
-import Button from './Button'
 
 const ThemeSelector = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -66,13 +65,13 @@ const ThemeSelector = () => {
 
     return (
         <div className="dropdown dropdown-end" ref={dropdownRef}>
-            <Button
+            <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="btn btn-ghost btn-circle"
                 title="Change theme"
             >
                 <Palette size={22} />
-            </Button>
+            </button>
 
             {/* Theme Selector Dropdown */}
             {isOpen && (
@@ -88,7 +87,7 @@ const ThemeSelector = () => {
                         <div className="max-h-96 overflow-y-auto p-3">
                             <div className="grid grid-cols-1 gap-2">
                                 {themes.map((theme) => (
-                                    <Button
+                                    <button
                                         key={theme.name}
                                         onClick={() => handleThemeChange(theme.name)}
                                         className={`flex items-center gap-3 p-3 rounded-lg hover:bg-base-300 transition-colors ${currentTheme === theme.name ? 'bg-base-300 ring-2 ring-primary' : ''
@@ -112,7 +111,7 @@ const ThemeSelector = () => {
                                         {currentTheme === theme.name && (
                                             <Check size={18} className="text-primary" />
                                         )}
-                                    </Button>
+                                    </button>
                                 ))}
                             </div>
                         </div>
