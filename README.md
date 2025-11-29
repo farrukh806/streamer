@@ -1,12 +1,12 @@
 # 🎥 Streamer
 
-> **⚠️ Project Status: In Progress**
-> 
-> This project is currently under active development. More comprehensive documentation, features, and setup instructions will be added as the project progresses.
+> A modern language learning platform that combines real-time communication with social features to create an immersive learning experience.
 
-## 📖 Overview
+## 🌐 Live Demo
 
-Streamer is a modern language learning platform that combines video streaming with social features to create an immersive learning experience. Users can connect with friends, practice languages through video content, and track their learning progress.
+**Deployed Application**: [https://streamer-0dmt.onrender.com](https://streamer-0dmt.onrender.com)
+
+Feel free to explore, create an account, and connect with other language learners!
 
 ## 🚀 Tech Stack
 
@@ -30,6 +30,8 @@ Streamer is a modern language learning platform that combines video streaming wi
 - **Icons**: Lucide React
 - **Notifications**: React Hot Toast
 - **HTTP Client**: Axios
+- **Real-time Chat**: Stream Chat React SDK
+- **Video Calling**: Stream Video React SDK
 
 ## 📁 Project Structure
 
@@ -159,13 +161,25 @@ streamer/
     - User menu with profile picture
     - Search functionality
   - Toast notifications
+- ✅ **Friends Page**
+  - Dedicated page to view all friends with profiles
+  - Friend list displayed with user details
+- ✅ **Real-time Messaging with Stream Chat**
+  - One-on-one conversations with friends
+  - Message history and persistence
+  - Typing indicators
+  - Read receipts
+  - Thread support for organized conversations
+- ✅ **Video Calling with Stream Video**
+  - Direct video calls with friends
+  - Video call integration in chat messages
+  - Call notifications and invitations
 
 ### Planned Features
-- 🔄 Video streaming integration
-- 🔄 Real-time chat functionality
+- 🔄 Group video calls
+- 🔄 Video streaming library
 - 🔄 Language learning progress tracking
-- 🔄 Enhanced user profiles
-- 🔄 Onboarding flow improvements
+- 🔄 User profiles with learning statistics
 
 ## 🛠️ Setup Instructions
 
@@ -264,6 +278,12 @@ streamer/
 | PUT | `/api/user/update-friend-request-status/:id` | Accept or reject a friend request | Yes |
 | GET | `/api/user/friend-requests` | Get received friend requests | Yes |
 | GET | `/api/user/sent-friend-requests` | Get sent friend requests | Yes |
+
+### Chat Routes
+
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| GET | `/api/chat/stream-token` | Get Stream Chat token for authenticated user | Yes |
 
 ### Request/Response Examples
 
@@ -539,6 +559,38 @@ The project uses strict TypeScript settings for maximum type safety:
 - Strict mode enabled
 - ESModule interop enabled
 
+## 🎯 Key Features Explained
+
+### Friend System
+The friend system allows users to discover and connect with other language learners:
+- **User Recommendations**: See suggested users who match your learning interests
+- **Friend Requests**: Send requests to users and manage incoming requests
+- **Friends List**: View all your friends with their profiles and learning information
+
+### Real-Time Messaging (Stream Chat Integration)
+- One-to-one messaging with friends
+- Live chat using Stream Chat's robust infrastructure
+- Message history and persistence
+- Typing indicators and read receipts
+
+### Video Calling (Stream Video Integration)
+- Initiate video calls directly from chat
+- Share video call links through messages
+- High-quality video and audio
+- Easy call management
+
+## 📸 Screenshots
+
+The application features a modern, intuitive interface with:
+- Clean authentication pages (signup/login)
+- Profile onboarding flow
+- Dashboard with friend requests and recommendations
+- Dedicated friends list page
+- Real-time chat interface
+- Video call capabilities
+
+Visit the [live demo](https://streamer-0dmt.onrender.com) to see it in action!
+
 ## 🤝 Contributing
 
 *(Guidelines will be added as the project matures)*
@@ -546,6 +598,19 @@ The project uses strict TypeScript settings for maximum type safety:
 ## 📝 License
 
 ISC
+
 ---
 
-**Note**: This README will be updated regularly as new features are implemented and the project evolves. Check back for updates!
+## 🚀 Getting Started Quickly
+
+1. Visit [https://streamer-0dmt.onrender.com](https://streamer-0dmt.onrender.com)
+2. Create an account with email and password
+3. Complete your profile with languages and preferences
+4. Find friends using recommendations or search
+5. Send friend requests and connect
+6. Start chatting and calling with your friends!
+
+---
+
+**Last Updated**: November 2025  
+**Maintained by**: Farrukh806
