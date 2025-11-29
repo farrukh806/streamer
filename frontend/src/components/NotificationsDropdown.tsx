@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { Bell, UserPlus, Video, TrendingUp, MessageCircle, X } from 'lucide-react'
+import { useNavigate } from 'react-router'
 import Button from './Button'
 
 interface Notification {
@@ -13,6 +14,7 @@ interface Notification {
 const NotificationsDropdown = () => {
     const [isOpen, setIsOpen] = useState(false)
     const dropdownRef = useRef<HTMLDivElement>(null)
+    const navigate = useNavigate()
 
     // Sample notifications with types (will be replaced with actual data later)
     const sampleNotifications: Notification[] = [
@@ -127,7 +129,13 @@ const NotificationsDropdown = () => {
                         {/* Footer */}
                         {sampleNotifications.length > 0 && (
                             <div className="p-3 border-t border-base-300 bg-base-300/30">
-                                <Button className="btn btn-ghost btn-sm w-full text-primary hover:bg-primary/10">
+                                <Button
+                                    onClick={() => {
+                                        setIsOpen(false)
+                                        navigate('/notifications')
+                                    }}
+                                    className="btn btn-ghost btn-sm w-full text-primary hover:bg-primary/10"
+                                >
                                     View all notifications
                                 </Button>
                             </div>

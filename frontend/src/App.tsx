@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast'
 import useUserAuth from './hooks/useUserAuth'
 import Layout from './components/Layout'
 import Home from './pages/Home'
+import Notifications from './pages/Notifications'
 function App() {
   const { user, isLoading } = useUserAuth()
 
@@ -21,8 +22,8 @@ function App() {
     <section className='h-screen'>
       <Toaster position='top-center' />
       <Routes>
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
             isAuthenticated ? (
               isOnboarded ? (
@@ -33,18 +34,32 @@ function App() {
             ) : (
               <Navigate to="/login" replace />
             )
-          } 
+          }
         />
-        <Route 
-          path="/signup" 
-          element={isAuthenticated ? <Navigate to={isOnboarded ? "/" : "/onboarding"} replace /> : <Signup />} 
+        <Route
+          path="/notifications"
+          element={
+            isAuthenticated ? (
+              isOnboarded ? (
+                <Layout><Notifications /></Layout>
+              ) : (
+                <Navigate to="/onboarding" replace />
+              )
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
         />
-        <Route 
-          path="/login" 
-          element={isAuthenticated ? <Navigate to={isOnboarded ? "/" : "/onboarding"} replace /> : <Login />} 
+        <Route
+          path="/signup"
+          element={isAuthenticated ? <Navigate to={isOnboarded ? "/" : "/onboarding"} replace /> : <Signup />}
         />
-        <Route 
-          path="/onboarding" 
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to={isOnboarded ? "/" : "/onboarding"} replace /> : <Login />}
+        />
+        <Route
+          path="/onboarding"
           element={
             isAuthenticated ? (
               isOnboarded ? (
@@ -55,7 +70,7 @@ function App() {
             ) : (
               <Navigate to="/login" replace />
             )
-          } 
+          }
         />
       </Routes>
     </section>
